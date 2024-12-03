@@ -2,13 +2,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Receiver extends Thread {
-
-    public static List<String> queue = new ArrayList<>();
-
     int id;
     InputStreamReader streamReader;
     BufferedReader reader;
@@ -33,7 +28,8 @@ public class Receiver extends Thread {
 
                 boolean go=false, print=false;
 
-                if(reader.read()=='S')
+                int ch = reader.read();
+                if(ch=='S')
                 {
                     go=true;
                     print=true;
@@ -47,6 +43,15 @@ public class Receiver extends Thread {
                         break;
                     }
                     buffer[c]=(char)i;
+                    if (i=='L')
+                    {
+                        Connector.listOfThreads.remove(this);
+                        System.out.println((char) i);
+                    }
+                    if (i=='F')
+                    {
+                        System.out.println((char) i);
+                    }
                     c++;
                 }
                 if (print)

@@ -15,7 +15,6 @@ public class Writer extends Thread{
             }
 
             System.out.println(ss);
-            System.out.println(ss.length());
 
             for (Receiver r: Connector.listOfThreads)
             {
